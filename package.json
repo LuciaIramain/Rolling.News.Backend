@@ -1,0 +1,22 @@
+{
+  "name": "rollingnews-backend",
+  "version": "1.0.0",
+  "description": "Backend del diario digital RollingNews",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "diario digital",
+    "noticias de actualidad",
+    "finanzas",
+    "deportes",
+    "politica"
+  ],
+  "author": "Lucia Iramain, Eliana Perez, Lucas Perez",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "express": "^4.17.1"
+  }
+}
