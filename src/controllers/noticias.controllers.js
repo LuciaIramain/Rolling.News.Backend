@@ -43,6 +43,15 @@ noticiaCtrl.crearNoticia = async (req, res) => {
     }
 }
 
-
+noticiaCtrl.eliminarNoticia = async (req, res) => {
+    try{
+        await Noticia.findByIdAndDelete(req.params.id);
+        res.status(200).json({
+            mensaje: 'La noticia fue eliminada'
+        })
+    }catch(error){
+        console.log(error);
+    }
+}
 
 export default noticiaCtrl;
