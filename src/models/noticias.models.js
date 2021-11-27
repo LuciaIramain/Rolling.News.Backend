@@ -15,7 +15,7 @@ const noticiaSchema = new Schema({
     },
     descripcionDetallada:{
         type: String,
-        minlength: 2000,
+        minlength: 1000,
         maxlenght: 10000,
         required: true,
         unique: true
