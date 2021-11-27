@@ -3,6 +3,8 @@ import noticiaCtrl from "../controllers/noticias.controllers";
 
 const router = Router();
 
-router.route('/').get(noticiaCtrl.getPrueba).post(noticiaCtrl.crearNoticia);
+router.route('/')
+    .get(noticiaCtrl.getPrueba)
+    .post(noticiaCtrl.crearNoticia);
 
 export default router; 
