@@ -4,7 +4,7 @@ import noticiaCtrl from "../controllers/noticias.controllers";
 const router = Router();
 
 router.route('/')
-    .get(noticiaCtrl.getPrueba)
+    .get(noticiaCtrl.listarNoticias)
     .post(noticiaCtrl.crearNoticia);
 
 export default router; 

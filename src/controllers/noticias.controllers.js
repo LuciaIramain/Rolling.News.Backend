@@ -2,8 +2,16 @@ import Noticia from '../models/noticias.models';
 
 const noticiaCtrl = {};
 
-noticiaCtrl.getPrueba = (req, res) => {
-    res.send('prueba desde el controlador')
+noticiaCtrl.listarNoticias = async (req, res) => {
+    try{
+        const listaNoticias = await Noticia.find(); 
+        res.status(200).json(listaNoticias);
+    } catch(error) {
+        console.log(error);
+        res.status(500).json({
+            mensaje: 'Error al obtener la lista de noticias'
+        })
+    }
 };
 
 noticiaCtrl.crearNoticia = async (req, res) => {
@@ -34,5 +42,7 @@ noticiaCtrl.crearNoticia = async (req, res) => {
         })
     }
 }
+
+
 
 export default noticiaCtrl;
