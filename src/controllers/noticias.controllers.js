@@ -17,7 +17,7 @@ noticiaCtrl.listarNoticias = async (req, res) => {
 noticiaCtrl.crearNoticia = async (req, res) => {
     console.log(req.body);
     try{
-        const {tituloNoticia, descripcionBreve, descripcionDetallada, categoria, autor, fecha, imagen} = req.body;
+        const {tituloNoticia, descripcionBreve, descripcionDetallada, categoria, autor, fecha, imagen, destacada} = req.body;
         // Tengo que validar los datos con el mismo if de mi frontend
 
         // Crear una noticia en la BD
@@ -28,7 +28,8 @@ noticiaCtrl.crearNoticia = async (req, res) => {
             categoria,
             autor,
             fecha,
-            imagen
+            imagen,
+            destacada
         });
         //Guardo la noticia
         await nuevaNoticia.save();

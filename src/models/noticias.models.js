@@ -35,6 +35,9 @@ const noticiaSchema = new Schema({
     imagen: {
         type: String,
         required: true
+    },
+    destacada: {
+        type: String
     }
 });
 
