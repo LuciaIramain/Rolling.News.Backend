@@ -18,24 +18,33 @@ noticiaCtrl.crearNoticia = async (req, res) => {
     console.log(req.body);
     try{
         const {tituloNoticia, descripcionBreve, descripcionDetallada, categoria, autor, fecha, imagen, destacada} = req.body;
-        // Tengo que validar los datos con el mismo if de mi frontend
-
-        // Crear una noticia en la BD
-        const nuevaNoticia = new Noticia({
-            tituloNoticia,
-            descripcionBreve,
-            descripcionDetallada,
-            categoria,
-            autor,
-            fecha,
-            imagen,
-            destacada
-        });
-        //Guardo la noticia
-        await nuevaNoticia.save();
-        res.status(201).json({
-            mensaje: 'La noticia fue agregada con éxito a la BD'
-        });
+        if (req.body.tituloNoticia === '' 
+            || req.body.descripcionBreve === '' 
+            || req.body.descripcionDetallada === '' 
+            || req.body.categoria === '' 
+            || req.body.autor === '' 
+            || req.body.imagen === '' 
+            || req.body.fecha === '') {
+            res.status(500).json({
+                mensaje: 'Todos los campos son obligatorios'
+            });
+        } else {
+            const nuevaNoticia = new Noticia({
+                tituloNoticia,
+                descripcionBreve,
+                descripcionDetallada,
+                categoria,
+                autor,
+                fecha,
+                imagen,
+                destacada
+            });
+            //Guardo la noticia
+            await nuevaNoticia.save();
+            res.status(201).json({
+                mensaje: 'La noticia fue agregada con éxito a la BD'
+            });
+        }
     } catch(error) {
         console.log(error);
         res.status(500).json({
@@ -73,12 +82,12 @@ noticiaCtrl.obtenerNoticia = async (req, res) => {
 noticiaCtrl.editarNoticia = async (req, res) => {
     try{
         if (req.body.tituloNoticia === '' 
-        || req.body.descripcionBreve === '' 
-        || req.body.descripcionDetallada === '' 
-        || req.body.categoria === '' 
-        || req.body.autor === '' 
-        || req.body.imagen === '' 
-        || req.body.fecha === '') {
+            || req.body.descripcionBreve === '' 
+            || req.body.descripcionDetallada === '' 
+            || req.body.categoria === '' 
+            || req.body.autor === '' 
+            || req.body.imagen === '' 
+            || req.body.fecha === '') {
             res.status(500).json({
                 mensaje: 'Todos los campos son obligatorios'
             });
