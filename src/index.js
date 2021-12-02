@@ -4,6 +4,7 @@ import cors from 'cors';
 import path from 'path';
 import './database';
 import noticiasRoutes from "./routes/noticias.routes";
+import usuariosRoutes from "./routes/usuarios.routes";
 
 // Settings
 const app = express();
@@ -22,3 +23,4 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // Rutas
 app.use('/api/rollingnews/', noticiasRoutes);
+app.use('/api/rollingnews/usuarios/', usuariosRoutes);
