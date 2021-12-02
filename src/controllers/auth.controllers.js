@@ -3,9 +3,9 @@ import bcryptjs from 'bcryptjs';
 import { validationResult } from "express-validator";
 import jwt from 'jsonwebtoken';
 
-const usuariosCtrl = {};
+const authCtrl = {};
 
-usuariosCtrl.crearUsuario = async (req, res) => {
+authCtrl.autenticarUsuario = async (req, res) => {
     // Revisar los errores
     const errores = validationResult(req);
     if(!errores.isEmpty()) {
@@ -17,28 +17,23 @@ usuariosCtrl.crearUsuario = async (req, res) => {
     // Extraer email y password
     const {email, password} = req.body;
 
-    console.log(req.body);
     try {
-        // Revisar que el usuario registrado sea unico
+        // Revisar  que sea un usario registrado
         let usuario = await Usuario.findOne({ email });
-
-        if(usuario) {
+        if(!usuario) {
             return res.status(404).json({
-                mensaje: 'El usuario ya existe'
-            })
+                mensaje: 'El usuario no existe'
+            });
         }
-        
-        // Crea el nuevo usuario
-        usuario = new Usuario(req.body);
 
-        // Encriptar el usuario
-        const salt = await bcryptjs.genSalt(10);
-        usuario.password = await bcryptjs.hash(password, salt);
-
-        // Guardar usuario
-        await usuario.save();
-
-        // Crear y firmar el JWT
+        // Revisar su password
+        const passCorrecto = await bcryptjs.compare(password, usuario.password);
+        if(!passCorrecto) {
+            return res.status(404).json({
+                mensaje: 'Password incorrecto'
+            });
+        }
+        // Si todo es correcto -- Crear y firmar el JWT
         const payload = {
             usuario:{
                 id: usuario.id
@@ -57,10 +52,7 @@ usuariosCtrl.crearUsuario = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({
-            mensaje: 'Ocurrio un error al crear el usuario'
-        });
     }
 }
 
-export default usuariosCtrl;
+export default authCtrl;
