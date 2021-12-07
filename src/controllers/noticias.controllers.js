@@ -10,7 +10,7 @@ noticiaCtrl.listarNoticias = async (req, res) => {
         console.log(error);
         res.status(500).json({
             mensaje: 'Ocurrio un error al obtener la lista de noticias'
-        })
+        });
     }
 };
 
