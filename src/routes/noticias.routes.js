@@ -12,5 +12,4 @@ router.route('/:id')
     .get(noticiaCtrl.obtenerNoticia)
     .put(noticiaCtrl.editarNoticia);
         
-
 export default router; 

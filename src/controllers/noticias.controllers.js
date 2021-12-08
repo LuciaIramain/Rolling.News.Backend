@@ -3,9 +3,15 @@ import Noticia from '../models/noticias.models';
 const noticiaCtrl = {};
 
 noticiaCtrl.listarNoticias = async (req, res) => {
+    console.log(req.query);
     try{
-        const listaNoticias = await Noticia.find(); 
-        res.status(200).json(listaNoticias);
+        if(req.query.categoria){
+            const listaNoticias = await Noticia.find({categoria: req.query.categoria}); 
+            res.status(200).json(listaNoticias);
+        } else {
+            const listaNoticias = await Noticia.find(); 
+            res.status(200).json(listaNoticias);
+        }
     } catch(error) {
         console.log(error);
         res.status(500).json({
