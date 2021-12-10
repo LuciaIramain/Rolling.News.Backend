@@ -15,7 +15,7 @@ usuariosCtrl.crearUsuario = async (req, res) => {
     }
 
     // Extraer email y password
-    const {email, password} = req.body;
+    const {nombre, email, password} = req.body;
 
     console.log(req.body);
     try {
@@ -27,33 +27,23 @@ usuariosCtrl.crearUsuario = async (req, res) => {
                 mensaje: 'El usuario ya existe'
             })
         }
-        
-        // Crea el nuevo usuario
-        usuario = new Usuario(req.body);
 
+        const nuevoUsuario = {
+            nombre,
+            email,
+            token: []
+        }
+    
         // Encriptar el usuario
         const salt = await bcryptjs.genSalt(10);
-        usuario.password = await bcryptjs.hash(password, salt);
+        nuevoUsuario.password = await bcryptjs.hash(password, salt);
+
+        // Crear usuario
+        usuario = new Usuario(nuevoUsuario);
 
         // Guardar usuario
         await usuario.save();
-
-        // Crear y firmar el JWT
-        const payload = {
-            usuario:{
-                id: usuario.id
-            }
-        }
-
-        jwt.sign(payload, process.env.SECRETA, {
-            expiresIn: 3600 //1HORA
-        }, (error, token) => {
-            if(error) throw error;
-
-            res.json({
-                token
-            });
-        });
+        res.send('ok');
 
     } catch (error) {
         console.log(error);

@@ -25,12 +25,12 @@ noticiaCtrl.crearNoticia = async (req, res) => {
     try{
         const {tituloNoticia, descripcionBreve, descripcionDetallada, categoria, autor, fecha, imagen, destacada} = req.body;
         if (req.body.tituloNoticia === '' 
-            || req.body.descripcionBreve === '' 
-            || req.body.descripcionDetallada === '' 
-            || req.body.categoria === '' 
-            || req.body.autor === '' 
-            || req.body.imagen === '' 
-            || req.body.fecha === '') {
+        || req.body.descripcionBreve === '' 
+        || req.body.descripcionDetallada === '' 
+        || req.body.categoria === '' 
+        || req.body.autor === '' 
+        || req.body.imagen === '' 
+        || req.body.fecha === '') {
             res.status(500).json({
                 mensaje: 'Todos los campos son obligatorios'
             });

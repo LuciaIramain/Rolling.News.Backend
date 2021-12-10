@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken';
 const authCtrl = {};
 
 authCtrl.autenticarUsuario = async (req, res) => {
+    console.log('desde login');
     // Revisar los errores
     const errores = validationResult(req);
     if(!errores.isEmpty()) {
@@ -40,18 +41,26 @@ authCtrl.autenticarUsuario = async (req, res) => {
             }
         }
 
-        jwt.sign(payload, process.env.SECRETA, {
-            expiresIn: 3600 //1HORA
-        }, (error, token) => {
-            if(error) throw error;
-
-            res.json({
-                token
-            });
+        const token = jwt.sign(payload, process.env.SECRETA, {
+            expiresIn: '1h' //1HORA
+        });
+        usuario.token = [token]
+        await Usuario.updateOne(usuario);
+        res.json({
+            token
         });
 
     } catch (error) {
         console.log(error);
+    }
+}
+
+authCtrl.cerrarSesion = async (req, res) => {
+    try{
+        await Usuario.updateOne({_id: res.locals.user.id}, {$set: {token: []}});
+        res.send('sesión cerrada');
+    }catch(error){
+        console.log(error)
     }
 }
 

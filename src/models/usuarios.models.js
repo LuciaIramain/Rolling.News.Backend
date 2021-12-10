@@ -20,7 +20,8 @@ const usuarioSchema = new Schema({
     registro: {
         type: Date,
         default: Date.now()
-    }
+    },
+    token: [String]
 });
 
 const Usuario = mongoose.model('usuario', usuarioSchema);
