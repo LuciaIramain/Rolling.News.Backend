@@ -3,31 +3,27 @@ import mongoose, {Schema} from 'mongoose';
 const noticiaSchema = new Schema({
     tituloNoticia:{
         type: String,
-        maxlenght: 500,
-        unique: true
+        maxlenght: 500
     },
     descripcionBreve:{
         type: String,
-        maxlenght: 500,
-        unique: true
+        maxlenght: 500
     },
     descripcionDetallada:{
         type: String,
-        minlength: 500,
-        maxlenght: 10000,
-        unique: true
+        maxlenght: 10000
     },
     categoria:{
-        type: String,
+        type: String
     },
     autor: {
-        type: String,
+        type: String
     },
     fecha: {
-        type: Date,
+        type: Date
     },
     imagen: {
-        type: String,
+        type: String
     },
     destacada: {
         type: String
