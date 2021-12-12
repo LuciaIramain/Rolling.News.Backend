@@ -6,7 +6,6 @@ import jwt from 'jsonwebtoken';
 const authCtrl = {};
 
 authCtrl.autenticarUsuario = async (req, res) => {
-    console.log('desde login');
     // Revisar los errores
     const errores = validationResult(req);
     if(!errores.isEmpty()) {
@@ -60,7 +59,7 @@ authCtrl.cerrarSesion = async (req, res) => {
         await Usuario.updateOne({_id: res.locals.user.id}, {$set: {token: []}});
         res.send('sesión cerrada');
     }catch(error){
-        console.log(error)
+        console.log(error);
     }
 }
 
