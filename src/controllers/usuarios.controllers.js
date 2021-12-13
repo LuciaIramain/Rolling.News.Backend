@@ -43,8 +43,9 @@ usuariosCtrl.crearUsuario = async (req, res) => {
 
         // Guardar usuario
         await usuario.save();
-        res.send('ok');
-
+        res.status(201).json({
+            mensaje: 'Se creo el usuario'
+        });
     } catch (error) {
         console.log(error);
         res.status(500).json({
