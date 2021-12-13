@@ -41,9 +41,10 @@ authCtrl.autenticarUsuario = async (req, res) => {
         }
 
         const token = jwt.sign(payload, process.env.SECRETA, {
-            expiresIn: '1h' //1HORA
+            expiresIn: '1h'
         });
         usuario.token = [token]
+        console.log(usuario);
         await Usuario.updateOne(usuario);
         res.json({
             token
