@@ -15,7 +15,7 @@ const usuarioSchema = new Schema({
     password: {
         type: String,
         required: true,
-        trim: true,
+        trim: true
     },
     registro: {
         type: Date,
