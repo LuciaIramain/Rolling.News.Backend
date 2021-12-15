@@ -7,12 +7,12 @@ const usuariosCtrl = {};
 
 usuariosCtrl.crearUsuario = async (req, res) => {
     // Revisar los errores
-    const errores = validationResult(req);
-    if(!errores.isEmpty()) {
-        return res.status(404).json({
-            errores: errores.array()
-        });
-    }
+    // const errores = validationResult(req);
+    // if(!errores.isEmpty()) {
+    //     return res.status(404).json({
+    //         errores: errores.array()
+    //     });
+    // }
 
     // Extraer email y password
     const {nombre, email, password} = req.body;

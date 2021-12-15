@@ -45,7 +45,7 @@ authCtrl.autenticarUsuario = async (req, res) => {
         });
         usuario.token = [token]
         console.log(usuario);
-        await Usuario.updateOne(usuario);
+        await Usuario.updateOne({email: usuario.email}, usuario);
         res.json({
             token
         });
