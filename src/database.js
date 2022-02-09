@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-// const url = 'mongodb://localhost:27017/rollingnews';
 const url = 'mongodb+srv://luciairamain:Lu20Ir21@cluster0.0lnpe.mongodb.net/rollingnews';
 
 
